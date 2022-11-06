@@ -1,11 +1,6 @@
 import React from 'react';
 import CharacteristicsCSS from './cssModule_Reviews/Characteristics.module.css';
 
-
-
-
-
-
 /* data format
 
 "characteristics": {
@@ -29,10 +24,8 @@ import CharacteristicsCSS from './cssModule_Reviews/Characteristics.module.css';
 
 */
 
-
-const FittingStats = (props) => {
-
-  let labels = {
+function FittingStats(props) {
+  const labels = {
     Size: {
       low: 'A size too small',
       mid: 'Perfect',
@@ -62,23 +55,21 @@ const FittingStats = (props) => {
       low: 'Runs tight',
       mid: 'Perfect',
       high: 'Runs Long',
-    }
-
+    },
 
   };
 
-
   return (
-    <div className = {CharacteristicsCSS.container}>
+    <div className={CharacteristicsCSS.container}>
       {Object.keys(props.currentMeta.characteristics).map(
-        key => (
-          <div key = {key} className = {CharacteristicsCSS.box1}>
+        (key) => (
+          <div key={key} className={CharacteristicsCSS.box1}>
 
             <div>
-              <label id={key + '-label'}>{key}</label>
+              <label id={`${key}-label`}>{key}</label>
               <br />
               <input
-                className = {CharacteristicsCSS.bar}
+                className={CharacteristicsCSS.bar}
                 key={key}
                 type="range"
                 min="1"
@@ -87,22 +78,19 @@ const FittingStats = (props) => {
                 disabled
                 value={Math.round(props.currentMeta.characteristics[key].value * 1000) / 1000}
               />
-              <div className = {CharacteristicsCSS.box2}>
-                <div >{labels[key].low}</div>
-                <div >{labels[key].mid}</div>
-                <div >{labels[key].high}</div>
+              <div className={CharacteristicsCSS.box2}>
+                <div>{labels[key].low}</div>
+                <div>{labels[key].mid}</div>
+                <div>{labels[key].high}</div>
               </div>
             </div>
 
           </div>
-        )
+        ),
       )}
-
-
-
 
     </div>
   );
-};
+}
 
 export default FittingStats;
