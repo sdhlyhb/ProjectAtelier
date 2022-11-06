@@ -35,7 +35,7 @@ function ReviewEntry(props) {
 
         : props.review.body.length > 250 && !displayFull
 
-          ? <div id='review-body' className={ReviewEntryCSS.reviewBody}> {`${props.review.body.slice(0, 250)}...`}
+          ? <div id='review-body' className={ReviewEntryCSS.reviewBody}><Highlighted text={props.review.body.slice(0, 250)} highlight={props.search} />{"..."}
             <a href='null' style={{ 'color': 'blue' }} onClick={e => {
               e.preventDefault();
               setDisplayFull(true);
