@@ -77,16 +77,7 @@ const Ratings = (props) => {
             : <div style={{ fontSize: '20px', fontFamily: 'Roboto' }}>This product has no ratings yet! <br /><br /></div>
           }
           <div className={RatingBreakdownBarCSS.barsBox} id='bars-and-messages'>
-            {props.hasFilter
-              ? <div className={RatingBreakdownBarCSS.filterMsg}>
-                <span><i>Displaying reviews with highlighted ratings</i></span>
-                <br />
-                <a href='null' id="remove-all-filter-link" onClick={(e) => { props.removeFilterClick(e); resetFilter(); }}>Remove all filters</a>
-                <br />
-                <br />
-              </div>
-              : null
-            }
+
             <div
               className={RatingBreakdownBarCSS.box}
               id='ratingBar-5'
@@ -128,6 +119,17 @@ const Ratings = (props) => {
               <u>1 ★:</u> <RatingBreakdownBar percentage={percentage1} />
               {ratingsObj['1'] ? ratingsObj['1'] : 0}
             </div>
+
+            {props.hasFilter
+              ? <div className={RatingBreakdownBarCSS.filterMsg}>
+                <span><i>Displaying reviews with highlighted ratings</i></span>
+                <br />
+                <a href='null' id="remove-all-filter-link" onClick={(e) => { props.removeFilterClick(e); resetFilter(); }}>Remove all filters</a>
+                <br />
+                <br />
+              </div>
+              : null
+            }
 
           </div>
 
