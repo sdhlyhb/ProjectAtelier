@@ -1,37 +1,21 @@
-# **Project Name: Atelier**
-
-## Group: Palatino
+# **Atelier: E-commerce Web App**
 
 ## Description:
 
 This project comprises a complete redesign of an out-dated retail portal  and modernize the site.
 
-## Installation:
-
-1. Fork the project and clone to your local repository
-2. Install all the packages and dependencies by running:
-
-```jsx
-npm install
-```
-
-3. Run webpack at local development mode:
-
-```jsx
-npm run react-dev
-```
-
-4. Start server:
-
-```jsx
-npm run server-dev
-```
-
-5. create `config.js` file and add your github token
-6. Visit [http://localhost:3000](http://localhost:3000) to start the page
-7. You will need to create a free account at [https://imgbb.com/](https://imgbb.com/) and get an API key for the image upload feature. The key will be stored in the `config.js`
 
 ## Components:
+<a href='#product-overview'> Product Overview</a>   --Built by [Gene Yang](https://github.com/gyhcy)
+
+<a href='#related-products-and-outfits'>Related Products and Outfits</a>    --Built by [Amrinder Singh](https://github.com/amrinder1650)
+
+<a href='#questions-and-answers'> Questions and Answers</a>    --Built by [Andrew Sawadichai](https://github.com/asawadichai)
+
+<a href='#ratings-and-reviews'> Ratings and Reviews</a>   --Built by [Danting (Serena) Huang](https://github.com/sdhlyhb)
+
+
+## Feature Details:
 
 ### **Product Overview:**
 
@@ -76,7 +60,7 @@ In this section, there are 2 components: Related Products and Outfits.
 2. The outfits component is unique to each user. A user can assemble and add stuff to their outfit to see how it will look together. By clicking the first card, “Add to Outfit”, or the star in the overview section, the current item in the overview section will be added to a user’s outfit. The outfit is showcased on a deck in which each card presents an “X” icon, image, detailed name, price, and rating.
     1. Clicking on the “X” icon of a card will remove it from the outfit list.
 
-### **Questions & Answers**
+### **Questions and Answers**
 
 Built by [Andrew Sawadichai](https://github.com/asawadichai)
 
@@ -105,10 +89,12 @@ The functionality of the questions and answers component can be broken down into
     After each question, shoppers can choose to respond and answer the question. Clicking “Add Answer” opens a new popup modal where the shopper can submit a form for the individual question. The answer, username, and email inputs are mandatory while the photo upload is optional. Shoppers can upload up to 5 photos before the form prevents you from adding more.
 
 
-### **Ratings & Reviews**
+### **Ratings and Reviews**
 
 Built by [Serena Huang](https://github.com/sdhlyhb)
-![RatingsReviewsImage](https://user-images.githubusercontent.com/8715043/200261100-dcc43132-9717-475e-9970-9152c79cb1e4.png)
+
+
+![RatingsReviewsImage](https://user-images.githubusercontent.com/8715043/200273293-f020a3ed-df79-4a20-bbbc-6c7542aa7d85.png)
 
 **Features**
 
@@ -136,6 +122,34 @@ Built by [Serena Huang](https://github.com/sdhlyhb)
     - A user can provide feedback on any review without signing in
     - ‘Helpful’ button click will add the helpful count by 1 but won’t allow the second vote.
     - ‘Report’ button won’t delete the review in the API but will not let the review display in the review list anymore.
+
+
+## Installation:
+
+1. Fork the project and clone to your local repository
+2. Install all the packages and dependencies by running:
+
+```jsx
+npm install
+```
+
+3. Run webpack at local development mode:
+
+```jsx
+npm run react-dev
+```
+
+4. Start server:
+
+```jsx
+npm run server-dev
+```
+
+5. create `config.js` file and add your github token
+6. Visit [http://localhost:3000](http://localhost:3000) to start the page
+7. You will need to create a free account at [https://imgbb.com/](https://imgbb.com/) and get an API key for the image upload feature. The key will be stored in the `config.js`
+
+
 
 ## Tech Stack:
 
