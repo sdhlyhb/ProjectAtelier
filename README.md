@@ -103,14 +103,18 @@ Built by [Serena Huang](https://github.com/sdhlyhb)
 - **Filtering reviews by the star ratings**
     - the filters are additive and can be toggled.
     - the filter can be combined with other sorting or searching features.
-<img width="65%" src="https://user-images.githubusercontent.com/8715043/200271386-fb8c31a8-807e-4c2e-a420-755e11ee5cc1.gif" ></img>
+<img width="75%" src="https://user-images.githubusercontent.com/8715043/200425016-997d1c31-78df-41a9-984c-68c8d61f7393.gif" ></img>
 
 
 2.  **Reviews:**
 - **Display reviews containing star ratings, username, review date, review summary, review body, response from seller(if any), recommendation and images(if any).**
     - By default the first 250 characters of review body will display. For long reviews, the full content will display by clicking the ‘Show more’ link.
 - **Reviews pagination**: initial display is two reviews and will display two more upon each click of ‘load more’ button and the ‘load more’ button will disappear once all the reviews are loaded.
+
+<img width="75%" src="https://user-images.githubusercontent.com/8715043/200429105-714b2c80-ede8-4999-beed-69409cfc7d1c.gif" ></img>
 - **Searching**:  search reviews by keywords and the search can be combined with other filtering or sorting features to narrow down the results;
+
+<img width="75%" src="https://user-images.githubusercontent.com/8715043/200430827-010c97f4-ea4a-4d06-aca8-125b8c3c60a1.gif" ></img>
 - **Sorting by Relevant, Newest and helpful:**
     - Default sorting selection is ‘relevant’.
     - The sorting can be combined with filtering and searching features.
