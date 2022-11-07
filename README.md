@@ -108,7 +108,7 @@ The functionality of the questions and answers component can be broken down into
 ### **Ratings & Reviews**
 
 Built by [Serena Huang](https://github.com/sdhlyhb)
-![RatingsReviewsImage](https://user-images.githubusercontent.com/8715043/200259210-ab3bab92-ccaf-4df9-b475-4fa7a92881c1.png)
+![RatingsReviewsImage](https://user-images.githubusercontent.com/8715043/200261100-dcc43132-9717-475e-9970-9152c79cb1e4.png)
 
 **Features**
 
@@ -117,6 +117,8 @@ Built by [Serena Huang](https://github.com/sdhlyhb)
 - **Filtering reviews by the star ratings**
     - the filters are additive and can be toggled.
     - the filter can be combined with other sorting or searching features.
+![barSorting](https://user-images.githubusercontent.com/8715043/200264543-ba7563ac-38b1-41b9-bb26-fb7bbaa3cffa.gif)
+
 2.  **Reviews:**
 - **Display reviews containing star ratings, username, review date, review summary, review body, response from seller(if any), recommendation and images(if any).**
     - By default the first 250 characters of review body will display. For long reviews, the full content will display by clicking the ‘Show more’ link.
