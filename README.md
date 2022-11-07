@@ -103,6 +103,7 @@ Built by [Serena Huang](https://github.com/sdhlyhb)
 - **Filtering reviews by the star ratings**
     - the filters are additive and can be toggled.
     - the filter can be combined with other sorting or searching features.
+    
 <img width="75%" src="https://user-images.githubusercontent.com/8715043/200425016-997d1c31-78df-41a9-984c-68c8d61f7393.gif" ></img>
 
 
