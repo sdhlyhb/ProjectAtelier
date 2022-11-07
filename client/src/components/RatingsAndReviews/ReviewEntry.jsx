@@ -29,7 +29,7 @@ function ReviewEntry(props) {
 
       </div>
 
-      <h3 id='review-summary' style={{ 'fontFamily': 'Montserrat' }}> {props.review.summary}</h3>
+      <h3 id='review-summary' style={{ 'fontFamily': 'Montserrat' }}> <Highlighted text={props.review.summary} highlight={props.search} /></h3>
       {props.review.body.length <= 250
         ? <div id='review-body' className={ReviewEntryCSS.reviewBody}> <Highlighted text={props.review.body} highlight={props.search} /> </div>
 
@@ -95,14 +95,18 @@ function ReviewEntry(props) {
               <div id="image-pop-modal"
                 className={ReviewEntryCSS.photoModal}
               >
-                <div className={ReviewEntryCSS.photoModalScroller}>
-                  <img id="full-resolution-image"
+                <div >
 
-                    onClick={() => setImagePop(!imagePop)}
+                <img id="full-resolution-image"
+                    style={{
+                      maxWidth: "98%",
+                      maxHeight: "80vh",
+                    }}
+
+                    onClick={(e) => setImagePop(!imagePop)}
                     alt="full-photo"
                     src={imageUrl}
                   />
-
                 </div>
               </div>
             )

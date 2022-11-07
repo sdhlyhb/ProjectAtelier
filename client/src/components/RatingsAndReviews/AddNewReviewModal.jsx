@@ -1,8 +1,7 @@
 import React from 'react';
+import axios from 'axios';
 import AddStarRating from './AddStarRating.jsx';
 import CharacteristicsForm from './CharacteristicsForm.jsx';
-import axios from 'axios';
-
 import AddNewReviewModalCSS from './cssModule_Reviews/AddNewReviewModal.module.css';
 import WithTrackerHOC from '../../WithTrackerHOC.jsx';
 import Wrapper from '../../Wrapper.jsx';
@@ -16,9 +15,9 @@ class AddNewReviewModal extends React.Component {
 
       currentItemId: 0,
 
-      recommendStatus: 'yes', //default
+      recommendStatus: 'yes', // default
 
-      starRating: '', //default
+      starRating: '', // default
 
       characteristics: {},
 
@@ -54,70 +53,65 @@ class AddNewReviewModal extends React.Component {
 
       uploadErr: false,
 
-      hasError: false
+      hasError: false,
 
     };
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.setState({
       currentItemName: this.props.currentName,
-      currentItemId: this.props.currentProductId
+      currentItemId: this.props.currentProductId,
     });
   }
-
 
   componentDidUpdate(prevState, prevProps) {
     // if (prevState.images !== this.state.images) {
     //   this.imageUpload();
     // }
 
-
   }
-
 
   onValueChange(e) {
     this.setState({
-      recommendStatus: e.target.value
+      recommendStatus: e.target.value,
     });
   }
 
   onImageChange(e) {
-
     if (e.target.files && e.target.files[0]) {
-      let img = e.target.files[0];
-      let results = this.state.images;
-      let files = this.state.imageFiles;
+      const img = e.target.files[0];
+      const results = this.state.images;
+      const files = this.state.imageFiles;
 
       results.push(URL.createObjectURL(img));
       files.push(img);
 
       this.setState({
         images: results,
-        imageFiles: files
+        imageFiles: files,
         // uploaded: !preUploadStatus
       });
       this.imageUpload();
-
     }
   }
 
   imageUpload() {
-    let updated = [];
-    this.state.imageFiles.forEach(image => {
-      let formData = new FormData();
+    const updated = [];
+    this.state.imageFiles.forEach((image) => {
+      const formData = new FormData();
       formData.append('image', image);
 
       axios.post('/upload/images', formData, { headers: { 'content-Type': 'multipart/form-data' } })
-        .then(response => {
+        .then((response) => {
           updated.push(response.data);
           this.setState({
             uploadedImages: updated,
 
           });
-        }).catch(err => {
+        }).catch((err) => {
           this.setState({
-            uploadErr: true
+            uploadErr: true,
           });
         });
     });
@@ -126,115 +120,91 @@ class AddNewReviewModal extends React.Component {
   removeBtnClick(e) {
     e.preventDefault();
     console.log('e.currenttargetId:', e.currentTarget.id);
-    let idToFilter = e.currentTarget.id.split('-')[2];
-    let beforeRemove = this.state.uploadedImages;
-    let imageFilesBeforeRmv = this.state.imageFiles;
-    let imagesBeforeRemove = this.state.images;
-    let afterRemove = beforeRemove.slice(0, idToFilter).concat(beforeRemove.slice(idToFilter + 1));
-    let imageFilesAfterRemove = imageFilesBeforeRmv.slice(0, idToFilter).concat(imageFilesBeforeRmv.slice(idToFilter + 1));
-    let imagesAfterRemove = imagesBeforeRemove.slice(0, idToFilter).concat(imagesBeforeRemove.slice(idToFilter + 1));
-
+    const idToFilter = e.currentTarget.id.split('-')[2];
+    const beforeRemove = this.state.uploadedImages;
+    const imageFilesBeforeRmv = this.state.imageFiles;
+    const imagesBeforeRemove = this.state.images;
+    const afterRemove = beforeRemove.slice(0, idToFilter).concat(beforeRemove.slice(idToFilter + 1));
+    const imageFilesAfterRemove = imageFilesBeforeRmv.slice(0, idToFilter).concat(imageFilesBeforeRmv.slice(idToFilter + 1));
+    const imagesAfterRemove = imagesBeforeRemove.slice(0, idToFilter).concat(imagesBeforeRemove.slice(idToFilter + 1));
 
     this.setState({
       uploadedImages: afterRemove,
       imageFiles: imageFilesAfterRemove,
-      images: imagesAfterRemove
-
+      images: imagesAfterRemove,
 
     });
-
   }
 
   passStarRating(overallRating) {
     console.log('this is the overall rating:', overallRating);
-    this.setState({starRating: overallRating});
+    this.setState({ starRating: overallRating });
   }
 
   passCharRating(charRating) {
     console.log('this is the characteristics rating data:', charRating);
-    //convert the key to the corresponding id:
-    let charRatingConverted = {};
-    for (let key in charRating) {
+    // convert the key to the corresponding id:
+    const charRatingConverted = {};
+    for (const key in charRating) {
       if (charRating[key].length) {
-        let charKeyId = this.props.currentMeta.characteristics[key].id;
+        const charKeyId = this.props.currentMeta.characteristics[key].id;
         charRatingConverted[charKeyId] = Number(charRating[key]);
       }
     }
     console.log('this is processed:', charRatingConverted);
-    this.setState({characteristics: charRatingConverted});
+    this.setState({ characteristics: charRatingConverted });
   }
 
-
-
-
-
-
-
-
-
   postReview(reviewObj) {
-
     axios.post('/reviews', reviewObj)
-      .then(response => {
+      .then((response) => {
         console.log('Review posted!', response);
-      }).catch(err => console.log('can not post review!', err));
-
+      }).catch((err) => console.log('can not post review!', err));
   }
 
   validationInput() {
-    if (this.state.starRating ) {
+    if (this.state.starRating) {
       this.setState({
-        overallRatingErr: false
+        overallRatingErr: false,
       });
     }
-    if (Object.keys(this.state.characteristics).length === Object.keys(this.props.currentMeta.characteristics).length ) {
+    if (Object.keys(this.state.characteristics).length === Object.keys(this.props.currentMeta.characteristics).length) {
       this.setState({
-        CharacteristicsErr: false
-      });
-
-    }
-    if (this.state.ReviewBody.length >= 50 ) {
-      this.setState({
-        reviewBodyErr: false
+        CharacteristicsErr: false,
       });
     }
-    if (this.state.nickeName ) {
+    if (this.state.ReviewBody.length >= 50) {
       this.setState({
-        nickenameErr: false
+        reviewBodyErr: false,
       });
     }
-    if (this.state.Email ) {
+    if (this.state.nickeName) {
       this.setState({
-        EmailEmpty: false
+        nickenameErr: false,
       });
     }
-    if (this.state.Email ) {
-
+    if (this.state.Email) {
+      this.setState({
+        EmailEmpty: false,
+      });
+    }
+    if (this.state.Email) {
       if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.Email)) {
         this.setState({
-          EmailFormatErr: false
+          EmailFormatErr: false,
         });
-
       }
-
     }
   }
 
-
-
-
-
-
-
-
   async submitBtnClick(e) {
     e.preventDefault();
-    await(this.validationInput());
+    await (this.validationInput());
 
-    if ( this.state.overallRatingErr || this.state.CharacteristicsErr || this.state.reviewBodyErr || this.state.nickenameErr || this.state.EmailEmpty || this.state.EmailFormatErr) {
-      this.setState({hasError: true});
+    if (this.state.overallRatingErr || this.state.CharacteristicsErr || this.state.reviewBodyErr || this.state.nickenameErr || this.state.EmailEmpty || this.state.EmailFormatErr) {
+      this.setState({ hasError: true });
     } else {
-      let reviewObj = {};
+      const reviewObj = {};
       // eslint-disable-next-line camelcase
       reviewObj.product_id = Number(this.state.currentItemId);
       reviewObj.rating = this.state.starRating;
@@ -252,213 +222,196 @@ class AddNewReviewModal extends React.Component {
       console.log(reviewObj);
 
       this.postReview(reviewObj);
-      this.setState({posted: true, hasError: false});
+      this.setState({ posted: true, hasError: false });
       this.props.refresh();
-
     }
-
-
-
-
-
   }
 
-
-
-
-
-
-
-
-
-  render () {
+  render() {
     return (
       // <WithTrackerHOC eventName={'AddNewReviewModal'}>
       <>
-        <div className = {AddNewReviewModalCSS.dimmerBg}></div>
-        <div data-testid="addNewModal" id="add-new-review-modal-main" className = {AddNewReviewModalCSS.modalContainer} >
-          <h3 >Write Your Review</h3>
-          <div className = {AddNewReviewModalCSS.ModalScroller}>
+        <div className={AddNewReviewModalCSS.dimmerBg} />
+        <div data-testid="addNewModal" id="add-new-review-modal-main" className={AddNewReviewModalCSS.modalContainer}>
+          <h3>Write Your Review</h3>
+          <div className={AddNewReviewModalCSS.ModalScroller}>
             <form>
 
-              <div id="AddNewReviewModal-product-name" >About  <span style={{'color': 'blue', 'fontWeight': 'bolder'}}>{this.state.currentItemName}</span></div>
+              <div id="AddNewReviewModal-product-name">
+                About
+                {' '}
+                <span style={{ color: 'blue', fontWeight: 'bolder' }}>{this.state.currentItemName}</span>
+              </div>
 
-
-              <div name="rating" id='AddNewReviewModal-Overall-star-rating'>
+              <div name="rating" id="AddNewReviewModal-Overall-star-rating">
                 <br />
                 <b>Overall Rating *</b>
 
-                <AddStarRating passStarRating={this.passStarRating.bind(this)}/>
-
+                <AddStarRating passStarRating={this.passStarRating.bind(this)} />
 
               </div>
               <br />
-
 
               <div id="AddNewReviewModal-recommend">
-                <label><b>Do you recommend this product? *</b> </label>
-                <input type="radio" value="yes" name="recommend" checked={this.state.recommendStatus === 'yes'} onChange={e => this.onValueChange(e)} /> Yes
-                <input type="radio" value="no" name="recommend" checked={this.state.recommendStatus === 'no'} onChange={e => this.onValueChange(e)} /> No
+                <label>
+                  <b>Do you recommend this product? *</b>
+                  {' '}
+                </label>
+                <input type="radio" value="yes" name="recommend" checked={this.state.recommendStatus === 'yes'} onChange={(e) => this.onValueChange(e)} />
+                {' '}
+                Yes
+                <input type="radio" value="no" name="recommend" checked={this.state.recommendStatus === 'no'} onChange={(e) => this.onValueChange(e)} />
+                {' '}
+                No
               </div>
               <br />
 
-
-              <CharacteristicsForm currentMeta = {this.props.currentMeta} passCharRating = {this.passCharRating.bind(this)}/>
+              <CharacteristicsForm currentMeta={this.props.currentMeta} passCharRating={this.passCharRating.bind(this)} />
               <br />
 
-
-              <div id='AddNewReviewModal-review-content'>
-                <label><b>Review Summary</b> </label>
+              <div id="AddNewReviewModal-review-content">
+                <label>
+                  <b>Review Summary</b>
+                  {' '}
+                </label>
                 <br />
-                <textarea id='AddNewReviewModal-review-summary' style={{'width': '60%'}} type="text" name="summary" placeholder="Example: Best purchase ever!" maxLength='60' onChange = {e => this.setState({summary: e.target.value})}/>
+                <textarea id="AddNewReviewModal-review-summary" style={{ width: '60%' }} type="text" name="summary" placeholder="Example: Best purchase ever!" maxLength="60" onChange={(e) => this.setState({ summary: e.target.value })} />
               </div>
               <div>
                 <label><b>Review Body *</b></label>
                 <br />
-                <textarea id="AddNewReviewModal-review-body" style={{'width': '60%'}} type="text" name="body" placeholder="Why did you like the product or not?" maxLength='1000' rows="4" onChange = {e => this.setState({ReviewBody: e.target.value})}/>
+                <textarea id="AddNewReviewModal-review-body" style={{ width: '60%' }} type="text" name="body" placeholder="Why did you like the product or not?" maxLength="1000" rows="4" onChange={(e) => this.setState({ ReviewBody: e.target.value })} />
                 <br />
                 {this.state.ReviewBody.length < 50
-                  ? <span style={{'color': 'red', 'fontSize': '10pt'}}><i>Minimum required characters left: {50 - this.state.ReviewBody.length}</i></span>
-                  : <span style={{'color': 'blue', 'fontSize': '10pt'}}>Minimum reached! {1000 - this.state.ReviewBody.length} characters to reach maximum length</span>
-
-                }
+                  ? (
+                    <span style={{ color: 'red', fontSize: '10pt' }}>
+                      <i>
+                        Minimum required characters left:
+                        {' '}
+                        {50 - this.state.ReviewBody.length}
+                      </i>
+                    </span>
+                  )
+                  : (
+                    <span style={{ color: 'blue', fontSize: '10pt' }}>
+                      Minimum reached!
+                      {' '}
+                      {1000 - this.state.ReviewBody.length}
+                      {' '}
+                      characters to reach maximum length
+                    </span>
+                  )}
               </div>
 
-
-              <div id='AddNewReviewModal-imageUploader' >
+              <div id="AddNewReviewModal-imageUploader">
                 <h4>Upload your photos (up to 5) </h4>
                 {this.state.uploadedImages.length
 
-                  ? <div className = {AddNewReviewModalCSS.imageBox}>
-                    {this.state.uploadedImages.map((photo, index) => (
-                      <div className = {AddNewReviewModalCSS.imageEntryContainer} key = {'uploadImg' + index}>
-                        <span
-                          className = {AddNewReviewModalCSS.removeBtn}
-                          id={'remove-btn-' + index}
-                          onClick={
-                            e => {
-                              this.removeBtnClick(e);
-
+                  ? (
+                    <div className={AddNewReviewModalCSS.imageBox}>
+                      {this.state.uploadedImages.map((photo, index) => (
+                        <div className={AddNewReviewModalCSS.imageEntryContainer} key={`uploadImg${index}`}>
+                          <span
+                            className={AddNewReviewModalCSS.removeBtn}
+                            id={`remove-btn-${index}`}
+                            onClick={
+                              (e) => {
+                                this.removeBtnClick(e);
+                              }
                             }
-                          }> &#215;</span>
+                          >
+                            {' '}
+                            &#215;
+                          </span>
 
-                        <img className = {AddNewReviewModalCSS.photoThumbnail} src={photo} />
+                          <img className={AddNewReviewModalCSS.photoThumbnail} src={photo} />
 
-                      </div>
+                        </div>
 
+                      ))}
 
-
-                    ))}
-
-
-                  </div>
-                  : <div>no photo yet<br /></div>
-
-                }
+                    </div>
+                  )
+                  : (
+                    <div>
+                      no photo yet
+                      <br />
+                    </div>
+                  )}
 
                 {this.state.images.length < 5
-                  ? <div>
-                    <br />
-                    <label htmlFor="AddNewReviewModal-fileUpload">
+                  ? (
+                    <div>
+                      <br />
+                      <label htmlFor="AddNewReviewModal-fileUpload">
 
+                        <div id="AddNewReviewModal-addBtn" className={AddNewReviewModalCSS.addBtn}>
+                          +
+                        </div>
+                      </label>
+                      <input hidden id="AddNewReviewModal-fileUpload" type="file" onChange={this.onImageChange.bind(this)} accept="image/*" />
 
-                      <div id='AddNewReviewModal-addBtn' className = {AddNewReviewModalCSS.addBtn}>
-  +
-                      </div>
-                    </label>
-                    <input hidden id="AddNewReviewModal-fileUpload" type="file" onChange={this.onImageChange.bind(this)} accept="image/*" />
-
-                  </div>
-                  : null
-                }
-
-
+                    </div>
+                  )
+                  : null}
 
               </div>
               <br />
 
-
-              <div id='AddNewReviewModal-user-info'>
+              <div id="AddNewReviewModal-user-info">
                 <label><b>What is your nickname *</b></label>
-                <input id='AddNewReviewModal-nickname-input' type="text" name="name" placeholder="Example: jackson11!" onChange = {e => this.setState({nickeName: e.target.value})}/>
+                <input id="AddNewReviewModal-nickname-input" type="text" name="name" placeholder="Example: jackson11!" onChange={(e) => this.setState({ nickeName: e.target.value })} />
                 <br />
                 <label><b>Your Email *</b></label>
-                <input id='AddNewReviewModal-email-input' type="text" name="email" placeholder="Example: jackson11@email.com" onChange = {e => this.setState({Email: e.target.value})}/>
-                <p style={{'fontSize': '10pt'}}>For authentication reasons, you will not be emailed</p>
+                <input id="AddNewReviewModal-email-input" type="text" name="email" placeholder="Example: jackson11@email.com" onChange={(e) => this.setState({ Email: e.target.value })} />
+                <p style={{ fontSize: '10pt' }}>For authentication reasons, you will not be emailed</p>
 
               </div>
               {this.state.posted ? <div>Review posted!</div> : null}
 
-              <button data-testid="submitReview" id="AddNewReviewModal-submit-review-btn" onClick={e=> this.submitBtnClick(e)}>Submit Review</button>
+              <button className={AddNewReviewModalCSS.button} data-testid="submitReview" id="AddNewReviewModal-submit-review-btn" onClick={(e) => this.submitBtnClick(e)}>Submit Review</button>
 
               {/* input content validation */}
               {this.state.hasError
-                ? <div id='submissionError' data-testid="AddNewReviewModal-submissionErrorMsg" className = {AddNewReviewModalCSS.errMsg}>
-            You must fix the following errors:
-                  <br />
-                  {this.state.overallRatingErr
-                    ? <li>OverallRating empty</li>
-                    : null
+                ? (
+                  <div id="submissionError" data-testid="AddNewReviewModal-submissionErrorMsg" className={AddNewReviewModalCSS.errMsg}>
+                    You must fix the following errors:
+                    <br />
+                    {this.state.overallRatingErr
+                      ? <li>OverallRating empty</li>
+                      : null}
+                    {this.state.CharacteristicsErr
+                      ? <li>Characteristics empty</li>
+                      : null}
+                    {this.state.reviewBodyErr
+                      ? <li>Review Body is less than 50 chars</li>
+                      : null}
+                    {this.state.uploadErr
+                      ? <li>Image upload error</li>
+                      : null}
+                    {this.state.nickenameErr
+                      ? <li>Nickname empty</li>
+                      : null}
+                    {this.state.EmailEmpty
+                      ? <li>Email empty</li>
+                      : null}
+                    {this.state.EmailFormatErr
+                      ? <li>Email format Error</li>
+                      : null}
 
-                  }
-                  {this.state.CharacteristicsErr
-                    ? <li>Characteristics empty</li>
-                    : null
+                  </div>
+                )
 
-                  }
-                  {this.state.reviewBodyErr
-                    ? <li>Review Body is less than 50 chars</li>
-                    : null
+                : null}
 
-                  }
-                  {this.state.uploadErr
-                    ? <li>Image upload error</li>
-                    : null
-
-                  }
-                  {this.state.nickenameErr
-                    ? <li>Nickname empty</li>
-                    : null
-
-                  }
-                  {this.state.EmailEmpty
-                    ? <li>Email empty</li>
-                    : null
-
-                  }
-                  {this.state.EmailFormatErr
-                    ? <li>Email format Error</li>
-                    : null
-
-                  }
-
-                </div>
-
-                : null
-
-
-
-              }
-
-
-
-
-
-              <div id="AddNewReviewModal-close-modal-btn" data-testid="closeModal" className = {AddNewReviewModalCSS.removeBtn2} onClick = {e => this.props.handleCancelClick(e)}>&#215;</div>
-
-
-
-
+              <div id="AddNewReviewModal-close-modal-btn" data-testid="closeModal" className={AddNewReviewModalCSS.removeBtn2} onClick={(e) => this.props.handleCancelClick(e)}>&#215;</div>
 
             </form>
 
           </div>
 
-
-
         </div>
       </>
-
 
     );
   }

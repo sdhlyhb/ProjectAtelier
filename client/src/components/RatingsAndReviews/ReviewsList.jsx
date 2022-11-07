@@ -156,10 +156,10 @@ class ReviewsList extends React.Component {
 
             {/* conditional rendering when there are more than 2 reviews */}
             {(this.props.currentReviews.length > 2 && this.props.loadMore)
-              ? <button id="load-more-btn" onClick={this.handleLoadMoreClick.bind(this)}>MORE REVIEWS</button>
+              ? <button className={ReviewsListCSS.button} id="load-more-btn" onClick={this.handleLoadMoreClick.bind(this)}>MORE REVIEWS</button>
               : null}
 
-            <button data-testid="popModal" id="add-new-review-btn" onClick={this.handleAddReviewClick.bind(this)}>ADD A NEW REVIEW +</button>
+            <button className={ReviewsListCSS.button} data-testid="popModal" id="add-new-review-btn" onClick={this.handleAddReviewClick.bind(this)}>ADD A NEW REVIEW +</button>
 
             {this.state.addReviewSeen
               ? (
@@ -181,41 +181,5 @@ class ReviewsList extends React.Component {
     );
   }
 }
-
-// const ReviewsList = (props) => {
-// return (
-//   <div className={ReviewsListCSS.reviewListMain}>
-
-//     <div className="sort-slect">
-//       <h2>Reviews List</h2>
-//       <h3> xxx reviews, sorted by </h3>
-//       <select value='relevant' onChange ={e => {}} >
-//         <option name="relevant">Relevant</option>
-//         <option name="date">Newest</option>
-//         <option name="helpful">Helpful</option>
-//       </select>
-//     </div>
-//     <br/>
-//     {'--------------------------------------------------------------'}
-
-//     <div className={ReviewsListCSS.reviewScroller} >
-//       {props.currentDisplayReviews.map(
-//         review => <ReviewEntry key = {review.review_id} review = {review} />
-//       )}
-//     </div>
-
-//     {/* conditional rendering when there are more than 2 reviews */}
-//     {props.currentReviews.length > 2 && props.loadMore
-//       ? <button onClick={e => props.clickLoadMoreBtn(e)}>MORE REVIEWS</button>
-//       : null
-//     }
-
-//     <button onClick={e => props.clickAddReview(e)}>ADD A NEW REVIEW +</button>
-
-//     {props.addReview ? <AddNewReviewModal /> : null}
-
-//   </div>
-// );
-// };
 
 export default ReviewsList;
