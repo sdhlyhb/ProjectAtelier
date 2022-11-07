@@ -7,8 +7,10 @@
   background-color: #DDDDDD;
   padding-left: 20px;
   padding-right: 20px;
+  padding-bottom: 40px;
+  margin-bottom: 10px;
   width:70%;
-  height: 750px;
+  max-height: 850px;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -18,7 +20,7 @@ h2 {
 }
 
 .reviewScroller {
-  height:500px;
+  max-height:650px;
   width: auto;
   background-color: #ffffff;
   padding: 5px, 5px, 5px;
@@ -59,4 +61,23 @@ h2 {
   box-shadow: 2px 3px #888888;
   border-radius: 10px;
 
+}
+
+.button {
+  background-color: white;
+  border-radius: 4px;
+  border: 3px solid lightgrey;
+  padding: 5px 8px;
+  font-weight: 600;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8rem;
+  margin-top: 8px;
+
+}
+
+.button:hover {
+  color: #22577E;
+  border: 2px solid grey;
+  font-weight: 500px;
+  cursor: pointer;
 }

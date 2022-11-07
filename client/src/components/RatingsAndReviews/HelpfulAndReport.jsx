@@ -1,4 +1,3 @@
-
 import React from 'react';
 import axios from 'axios';
 
@@ -9,81 +8,88 @@ class HelpfulAndReport extends React.Component {
 
       helpfulCount: 0,
 
-      voted: false
-
+      voted: false,
 
     };
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.setState({
       helpfulCount: this.props.count,
 
     });
-
   }
 
-
   voteYesClick(e) {
-    let updatedVote = this.state.helpfulCount + 1;
-    let currentReviewId = e.currentTarget.id.split('-')[0];
+    const updatedVote = this.state.helpfulCount + 1;
+    const currentReviewId = e.currentTarget.id.split('-')[0];
     axios.put(`/reviews/${currentReviewId}/helpful`)
-      .then(response => {
+      .then((response) => {
         console.log('Successful update helpful vote!');
         this.setState({
           helpfulCount: updatedVote,
-          voted: true
+          voted: true,
 
         });
-      }).catch(err => {
+      }).catch((err) => {
         console.log('Err update helpful vote');
       });
-
-
   }
 
   reportBtnClick(e) {
     console.log('report btn clicked!');
-    let reviewId = e.currentTarget.id.split('-')[0];
+    const reviewId = e.currentTarget.id.split('-')[0];
     axios.put(`/reviews/${reviewId}/report`)
-      .then(response => {
+      .then((response) => {
         console.log(`review ${reviewId} has been reported! You should not see it in the list anymore!`);
-      }).catch(err => console.log('Err report the review!'));
+      }).catch((err) => console.log('Err report the review!'));
 
     this.props.removeReportedReview(reviewId);
     this.props.refresh();
-
   }
-
 
   render() {
     return (
       <div className="review-entry-footer">
-        <span >Helpful?</span>
+        <span>Helpful?</span>
         &nbsp;&nbsp;&nbsp;&nbsp;
         {!this.state.voted
-          ? <a
-            href=''
-            id={this.props.reviewId + '-yes'}
-            onClick={e => { e.preventDefault(); this.voteYesClick(e); }}
-          >Yes({this.state.helpfulCount})</a>
-          : <a
-            href=''
-            onClick={e => { e.preventDefault(); }}
-            id={this.props.reviewId + '-yes'}
-          >Yes({this.state.helpfulCount})</a>
-
-        }
+          ? (
+            <a
+              href=""
+              id={`${this.props.reviewId}-yes`}
+              onClick={(e) => { e.preventDefault(); this.voteYesClick(e); }}
+            >
+              Yes(
+              {this.state.helpfulCount}
+              )
+            </a>
+          )
+          : (
+            <a
+              href=""
+              onClick={(e) => { e.preventDefault(); }}
+              id={`${this.props.reviewId}-yes`}
+            >
+              Yes(
+              {this.state.helpfulCount}
+              )
+              &#10004;Voted
+            </a>
+          )}
         &nbsp;&nbsp;
 
         {' | '}
         &nbsp;&nbsp;
 
-        <a href='' data-testid='voteHelpful' id={this.props.reviewId + '-report'} onClick = {e => { e.preventDefault(); this.reportBtnClick(e); }}>  Report</a>
+        <a href="" data-testid="voteHelpful"
+        id={`${this.props.reviewId}-report`}
+        onClick={(e) => {
+          e.preventDefault();
+          this.reportBtnClick(e); }}>  Report</a>
       </div>
     );
   }
-
 }
 
 export default HelpfulAndReport;

@@ -21,9 +21,9 @@ const Ratings = (props) => {
   let ratingPercentageArr = Object.values(rantingPercentageObj);
   let percentage1 = ratingPercentageArr[0];
   let percentage2 = ratingPercentageArr[1];
-  let percentage3 = ratingPercentageArr[2];
-  let percentage4 = ratingPercentageArr[3];
-  let percentage5 = ratingPercentageArr[4];
+  const percentage3 = ratingPercentageArr[2];
+  const percentage4 = ratingPercentageArr[3];
+  const percentage5 = ratingPercentageArr[4];
 
   const [selectedFilter, setSelectedFilter] = useState({
     '5': false,
@@ -34,9 +34,8 @@ const Ratings = (props) => {
 
   });
 
-
   const toggleFilterSelection = (e) => {
-    let clickedRating = e.currentTarget.id.split('-')[1];
+    const clickedRating = e.currentTarget.id.split('-')[1];
     console.log('clicked rating:', clickedRating);
     setSelectedFilter(prevSelectedFilter => ({ ...prevSelectedFilter, [clickedRating]: !prevSelectedFilter[clickedRating] }));
 
@@ -46,14 +45,13 @@ const Ratings = (props) => {
     props.passRatingFilter(selectedFilter);
   }, [selectedFilter]);
 
-
   const resetFilter = () => {
     setSelectedFilter({
       '5': false,
       '4': false,
       '3': false,
       '2': false,
-      '1': false
+      '1': false,
 
     });
   };
@@ -67,7 +65,7 @@ const Ratings = (props) => {
           {avgStars > 0
             ? <div id="avg-star-rating">
               <div className={RatingBreakdownBarCSS.box2} >
-                <span style={{ 'fontSize': '45px', 'fontFamily': 'Arial', 'fontWeight': 'bolder'}} id="avg-star-score" >{avgStars}</span>
+                <span style={{ 'fontSize': '45px', 'fontFamily': 'Arial', 'fontWeight': 'bolder' }} id="avg-star-score">{avgStars}</span>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <Stars percent={percent} />
               </div>
@@ -75,40 +73,16 @@ const Ratings = (props) => {
               <br />
               <div id='recommendation-rate'>{recommendRate}% of reviews recommend this product</div>
               <br />
-
-
             </div>
-
-
-
-            : <div style={{ 'fontSize': '20px', 'fontFamily': 'Roboto'}}>This product has no ratings yet! <br /><br /></div>
-
-
+            : <div style={{ fontSize: '20px', fontFamily: 'Roboto' }}>This product has no ratings yet! <br /><br /></div>
           }
-
           <div className={RatingBreakdownBarCSS.barsBox} id='bars-and-messages'>
-            {props.hasFilter
-              ? <div className={RatingBreakdownBarCSS.filterMsg}>
-                <span><i>Displaying reviews with highlighted ratings</i></span>
-                <br />
-                <a href='null' id="remove-all-filter-link" onClick={e => { props.removeFilterClick(e); resetFilter(); }}>Remove all filters</a>
-                <br />
-                <br />
-
-              </div>
-              : null
-
-            }
-
-
-
 
             <div
               className={RatingBreakdownBarCSS.box}
               id='ratingBar-5'
               onClick={toggleFilterSelection}
               style={{ background: selectedFilter['5'] ? 'yellow' : null }}
-
             >
               <u>5 ★:</u> <RatingBreakdownBar percentage={percentage5} />
               {ratingsObj['5'] ? ratingsObj['5'] : 0}
@@ -141,22 +115,29 @@ const Ratings = (props) => {
             <div className={RatingBreakdownBarCSS.box} id='ratingBar-1'
               onClick={toggleFilterSelection}
               style={{ background: selectedFilter['1'] ? 'yellow' : null }}
-
             >
               <u>1 ★:</u> <RatingBreakdownBar percentage={percentage1} />
               {ratingsObj['1'] ? ratingsObj['1'] : 0}
-
             </div>
 
+            {props.hasFilter
+              ? <div className={RatingBreakdownBarCSS.filterMsg}>
+                <span><i>Displaying reviews with highlighted ratings</i></span>
+                <br />
+                <a href='null' id="remove-all-filter-link" onClick={(e) => { props.removeFilterClick(e); resetFilter(); }}>Remove all filters</a>
+                <br />
+                <br />
+              </div>
+              : null
+            }
 
           </div>
-
 
         </div>
       </WithTrackerHOC>
 
       <WithTrackerHOC eventName={'Ratings'}>
-        <div id='charateristics-rating-bars'>
+        <div id="charateristics-rating-bars">
           <FittingStats currentMeta={props.currentMetaReview} />
         </div>
       </WithTrackerHOC>
