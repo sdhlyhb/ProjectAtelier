@@ -108,6 +108,7 @@ The functionality of the questions and answers component can be broken down into
 ### **Ratings & Reviews**
 
 Built by [Serena Huang](https://github.com/sdhlyhb)
+![RatingsReviewsImage](https://user-images.githubusercontent.com/8715043/200259210-ab3bab92-ccaf-4df9-b475-4fa7a92881c1.png)
 
 **Features**
 
@@ -131,7 +132,7 @@ Built by [Serena Huang](https://github.com/sdhlyhb)
 - **“Helpful” vote and report reviews**
     - A user can provide feedback on any review without signing in
     - ‘Helpful’ button click will add the helpful count by 1 but won’t allow the second vote.
-    - ‘Report’ button won’t delete the review but will not let the review display in the review list anymore.
+    - ‘Report’ button won’t delete the review in the API but will not let the review display in the review list anymore.
 
 ## Tech Stack:
 
