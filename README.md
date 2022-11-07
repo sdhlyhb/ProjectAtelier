@@ -117,7 +117,8 @@ Built by [Serena Huang](https://github.com/sdhlyhb)
 - **Filtering reviews by the star ratings**
     - the filters are additive and can be toggled.
     - the filter can be combined with other sorting or searching features.
-![barSorting](https://user-images.githubusercontent.com/8715043/200264543-ba7563ac-38b1-41b9-bb26-fb7bbaa3cffa.gif)
+<img width="65%" src="https://user-images.githubusercontent.com/8715043/200271386-fb8c31a8-807e-4c2e-a420-755e11ee5cc1.gif" ></img>
+
 
 2.  **Reviews:**
 - **Display reviews containing star ratings, username, review date, review summary, review body, response from seller(if any), recommendation and images(if any).**
