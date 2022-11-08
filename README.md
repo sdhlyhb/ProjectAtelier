@@ -119,15 +119,20 @@ Built by [Serena Huang](https://github.com/sdhlyhb)
 - **Sorting by Relevant, Newest and helpful:**
     - Default sorting selection is ‘relevant’.
     - The sorting can be combined with filtering and searching features.
+
+<img width="75%" src="https://user-images.githubusercontent.com/8715043/200499033-db227c65-27f3-4c38-8918-29e0f0ca201a.gif" ></img>
 - **Add new reviews**:
     - users can add overall 1 to 5 star rating, characteristics rating, recommendation, review summary(optional), review body, review photos, nicknames and emails.
     - users can upload up to 5 photos for each review.
     - If the any of mandatory parts are not filled or if there is error with photo uploading or email format, the submission will be denied and error messages will display.
+    
+<img width="75%" src="https://user-images.githubusercontent.com/8715043/200504943-d67fdefd-a71a-4769-a613-54f7848e7884.gif" ></img>
 - **“Helpful” vote and report reviews**
     - A user can provide feedback on any review without signing in
     - ‘Helpful’ button click will add the helpful count by 1 but won’t allow the second vote.
     - ‘Report’ button won’t delete the review in the API but will not let the review display in the review list anymore.
 
+<img width="75%" src="https://user-images.githubusercontent.com/8715043/200506725-7391972b-ea3a-45fb-a24a-ed4bc156670a.gif" ></img>
 
 ## Installation:
 
